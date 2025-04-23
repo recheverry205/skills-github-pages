@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simbiosis Industrial - Conectando Empresas para la Sostenibilidad</title>
+    <style>
+        /* Reset y Estilos Generales */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            color: #333;
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        /* Header */
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 1rem 2rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            margin-right: 10px;
+            color: #1abc9c;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+        
+        nav ul li a {
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+        
+        nav ul li a:hover {
+            color: #1abc9c;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Secciones */
+        section {
+            padding: 6rem 2rem 4rem;
+            min-height: 100vh;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            color: #2c3e50;
+            text-align: center;
+            position: relative;
+        }
+        
+        section h2::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background: #1abc9c;
+            margin: 0.5rem auto;
+        }
+        
+        /* Hero Section */
+        #inicio {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1513828583688-c52646db42da');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            display: flex;
+            align-items: center;
+            text-align: center;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero-content h1 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: #1abc9c;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            font-weight: bold;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        
+        .btn:hover {
+            background: #16a085;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        /* Quick Facts */
+        .quick-facts {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin: 3rem 0;
+        }
+        
+        .fact-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            margin: 1rem;
+            flex: 1;
+            min-width: 200px;
+            transition: transform 0.3s;
+        }
+        
+        .fact-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .fact-card h3 {
+            font-size: 2.5rem;
+            color: #1abc9c;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Qué es Section */
+        .definition-content {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .definition-text {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .definition-image {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .definition-image img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .comparison {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+            margin-top: 3rem;
+        }
+        
+        .comparison-item {
+            flex: 1;
+            min-width: 250px;
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        
+        .comparison-item h3 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+        
+        /* Casos de Éxito */
+        .case-studies {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .case-study {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .case-study:hover {
+            transform: translateY(-10px);
+        }
+        
+        .case-img {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .case-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .case-study:hover .case-img img {
+            transform: scale(1.1);
+        }
+        
+        .case-content {
+            padding: 1.5rem;
+        }
+        
+        .case-content h3 {
+            color: #2c3e50;
+            margin-bottom: 1rem;
+        }
+        
+        .case-stats {
+            margin-top: 1rem;
+            list-style: none;
+        }
+        
+        .case-stats li {
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .case-stats li::before {
+            content: '✓';
+            color: #1abc9c;
+            margin-right: 0.5rem;
+            font-weight: bold;
+        }
+        
+        /* Beneficios */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .benefit-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: all 0.3s;
+        }
+        
+        .benefit-card:hover {
+            background: #2c3e50;
+            color: white;
+            transform: translateY(-10px);
+        }
+        
+        .benefit-icon {
+            font-size: 3rem;
+            color: #1abc9c;
+            margin-bottom: 1rem;
+        }
+        
+        .benefit-card:hover .benefit-icon {
+            color: white;
+        }
+        
+        /* Cómo Participar */
+        .steps {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+            margin-top: 3rem;
+        }
+        
+        .step {
+            flex: 1;
+            min-width: 200px;
+            max-width: 250px;
+            text-align: center;
+            position: relative;
+            padding-top: 3rem;
+        }
+        
+        .step-number {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 50px;
+            background: #1abc9c;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+        
+        .step h3 {
+            margin: 1rem 0;
+            color: #2c3e50;
+        }
+        
+        /* Contacto */
+        .contact-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+        
+        .contact-form {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        
+        .form-group textarea {
+            min-height: 150px;
+        }
+        
+        .contact-info {
+            flex: 1;
+            min-width: 300px;
+        }
+        
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+        }
+        
+        .info-icon {
+            font-size: 1.5rem;
+            color: #1abc9c;
+            margin-right: 1rem;
+            margin-top: 0.3rem;
+        }
+        
+        /* FAQ */
+        .faq-container {
+            max-width: 800px;
+            margin: 3rem auto 0;
+        }
+        
+        .faq-item {
+            margin-bottom: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        
+        .faq-question {
+            padding: 1rem;
+            background: #f9f9f9;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 500;
+        }
+        
+        .faq-question::after {
+            content: '+';
+            font-size: 1.5rem;
+        }
+        
+        .faq-item.active .faq-question::after {
+            content: '-';
+        }
+        
+        .faq-answer {
+            padding: 0 1rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+        
+        .faq-item.active .faq-answer {
+            padding: 1rem;
+            max-height: 500px;
+        }
+        
+        /* Footer */
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        .social-links {
+            margin: 1rem 0;
+        }
+        
+        .social-links a {
+            display: inline-block;
+            margin: 0 0.5rem;
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+        
+        .social-links a:hover {
+            color: #1abc9c;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav {
+                margin-top: 1rem;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav ul li {
+                margin: 0.5rem 0;
+            }
+            
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+            
+            section {
+                padding: 5rem 1rem 3rem;
+            }
+            
+            section h2 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Header/Navbar -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <i class="fas fa-recycle"></i>
+                <span>Simbiosis Industrial</span>
+            </div>
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav id="mainNav">
+                <ul>
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#que-es">¿Qué es?</a></li>
+                    <li><a href="#casos-exito">Casos de Éxito</a></li>
+                    <li><a href="#beneficios">Beneficios</a></li>
+                    <li><a href="#participar">Cómo Participar</a></li>
+                    <li><a href="#herramientas">Herramientas</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Sección Inicio -->
+    <section id="inicio">
+        <div class="hero-content">
+            <h1>Conectando industrias para un futuro sostenible</h1>
+            <p>La simbiosis industrial transforma los residuos de una empresa en recursos para otra, creando redes de colaboración que benefician al medio ambiente y a la economía.</p>
+            <a href="#participar" class="btn">Descubre cómo participar</a>
+        </div>
+    </section>
+
+    <!-- Sección Qué es -->
+    <section id="que-es">
+        <h2>¿Qué es la Simbiosis Industrial?</h2>
+        <div class="definition-content">
+            <div class="definition-text">
+                <p>La simbiosis industrial es una estrategia de sostenibilidad donde los residuos o subproductos de una empresa se convierten en materias primas para otra, creando una red de intercambio de recursos que imita los ecosistemas naturales.</p>
+                <p>Este enfoque colaborativo permite a las empresas reducir costos, minimizar su impacto ambiental y descubrir nuevas oportunidades de negocio, todo mientras contribuyen a la transición hacia una economía circular.</p>
+            </div>
+            <div class="definition-image">
+                <img src="https://images.unsplash.com/photo-1611273426858-450d8e3c9fce" alt="Diagrama de simbiosis industrial">
+            </div>
+        </div>
+
+        <div class="comparison">
+            <div class="comparison-item">
+                <h3>Economía Lineal</h3>
+                <p>Extraer → Producir → Desechar</p>
+                <p>Modelo tradicional con alto impacto ambiental</p>
+            </div>
+            <div class="comparison-item">
+                <h3>Economía Circular</h3>
+                <p>Reducir → Reusar → Reciclar</p>
+                <p>Enfoque sostenible dentro de una empresa</p>
+            </div>
+            <div class="comparison-item">
+                <h3>Simbiosis Industrial</h3>
+                <p>Conectar → Compartir → Optimizar</p>
+                <p>Colaboración entre múltiples empresas</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Casos de Éxito -->
+    <section id="casos-exito">
+        <h2>Casos de Éxito</h2>
+        <div class="case-studies">
+            <article class="case-study">
+                <div class="case-img">
+                    <img src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789" alt="Parque industrial de Kalundborg">
+                </div>
+                <div class="case-content">
+                    <h3>Kalundborg, Dinamarca</h3>
+                    <p>El primer y más conocido ejemplo de simbiosis industrial, donde empresas como una central eléctrica, una refinería de petróleo y una planta farmacéutica intercambian agua, energía y materiales.</p>
+                    <ul class="case-stats">
+                        <li>Operando desde 1972</li>
+                        <li>Reducción de CO2: 240,000 ton/año</li>
+                        <li>Ahorro anual: $15 millones</li>
+                    </ul>
+                </div>
+            </article>
+
+            <article class="case-study">
+                <div class="case-img">
+                    <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf" alt="Parque industrial en Japón">
+                </div>
+                <div class="case-content">
+                    <h3>Kawasaki, Japón</h3>
+                    <p>Red de 14 empresas que intercambian vapor, agua y materiales, incluyendo acero, cemento y productos químicos.</p>
+                    <ul class="case-stats">
+                        <li>Reducción de residuos: 565,000 ton/año</li>
+                        <li>Ahorro de agua: 1.2 millones m³/año</li>
+                        <li>Creación de 800 empleos</li>
+                    </ul>
+                </div>
+            </article>
+
+            <article class="case-study">
+                <div class="case-img">
+                    <img src="https://images.unsplash.com/photo-1513828583688-c52646db42da" alt="Planta de reciclaje">
+                </div>
+                <div class="case-content">
+                    <h3>NISP, Reino Unido</h3>
+                    <p>La Red Nacional de Simbiosis Industrial del Reino Unido ha facilitado más de 200 conexiones entre empresas.</p>
+                    <ul class="case-stats">
+                        <li>47 millones de toneladas de residios desviados</li>
+                        <li>Ahorros de $200 millones</li>
+                        <li>Reducción de 7.5 millones de toneladas de CO2</li>
+                    </ul>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- Sección Beneficios -->
+    <section id="beneficios">
+        <h2>Beneficios</h2>
+        <div class="benefits-grid">
+            <div class="benefit-card">
+                <div class="benefit-icon">
+                    <i class="fas fa-leaf"></i>
+                </div>
+                <h3>Sostenibilidad Ambiental</h3>
+                <p>Reducción significativa de residuos, emisiones y consumo de recursos naturales.</p>
+            </div>
+
+            <div class="benefit-card">
+                <div class="benefit-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h3>Ventajas Económicas</h3>
+                <p>Ahorro en costos de materias primas, gestión de residuos y cumplimiento normativo.</p>
+            </div>
+
+            <div class="benefit-card">
+                <div class="benefit-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h3>Innovación Colaborativa</h3>
+                <p>Oportunidades para nuevos negocios y mejora de la competitividad.</p>
+            </div>
+
+            <div class="benefit-card">
+                <div class="benefit-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h3>Seguridad de Recursos</h3>
+                <p>Acceso más estable a materiales críticos y diversificación de fuentes.</p>
+            </div>
+
+            <div class="benefit-card">
+                <div class="benefit-icon">
+                    <i class="fas fa-handshake"></i>
+                </div>
+                <h3>Relaciones Empresariales</h3>
+                <p>Fortalecimiento de la red de contactos y reputación corporativa.</p>
+            </div>
+
+            <div class="benefit-card">
+                <div class="benefit-icon">
+                    <i class="fas fa-globe-europe"></i>
+                </div>
+                <h3>Contribución Social</h3>
+                <p>Creación de empleos verdes y desarrollo económico local sostenible.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Cómo Participar -->
+    <section id="participar">
+        <h2>Cómo Participar</h2>
+        <p style="text-align: center; max-width: 800px; margin: 0 auto 2rem;">Sigue estos pasos para integrarte en una red de simbiosis industrial y comenzar a beneficiarte de esta estrategia sostenible.</p>
+
+        <div class="steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <h3>Análisis Interno</h3>
+                <p>Identifica tus flujos de materiales, residuos y necesidades de recursos.</p>
+            </div>
+
+            <div class="step">
+                <div class="step-number">2</div>
+                <h3>Registro</h3>
+                <p>Únete a una plataforma de simbiosis industrial o red local.</p>
+            </div>
+
+            <div class="step">
+                <div class="step-number">3</div>
+                <h3>Matchmaking</h3>
+                <p>Participa en eventos de conexión o usa herramientas digitales para encontrar socios.</p>
+            </div>
+
+            <div class="step">
+                <div class="step-number">4</div>
+                <h3>Implementación</h3>
+                <p>Desarrolla acuerdos de colaboración y comienza los intercambios.</p>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 4rem;">
+            <h3>¿Cumples con los requisitos?</h3>
+            <p>Empresas de todos los tamaños y sectores pueden participar. Lo esencial es la voluntad de colaborar y optimizar recursos.</p>
+            <a href="#contacto" class="btn" style="margin-top: 1rem;">Contáctanos para más información</a>
+        </div>
+    </section>
+
+    <!-- Sección Herramientas -->
+    <section id="herramientas">
+        <h2>Herramientas y Recursos</h2>
+        <div class="benefits-grid" style="margin-top: 3rem;">
+            <div class="benefit-card">
+                <div class="benefit-icon">
+                    <i class="fas fa-database"></i>
+                </div>
+                <h3>Software de Análisis</h3>
+                <p>Herramientas para mapear flujos de materiales y identificar oportunidades.</p>
+                <a href="#" class="btn" style="margin-top: 1rem; display: inline-block; padding: 0.5rem 1rem;">Explorar</a>
+            </div>
+
+            <div class="benefit-card">
+                <div class="benefit-icon">
+                    <i class="fas fa-book"></i>
+                </div>
+                <h3>Guías y Manuales</h3>
+                <p>Documentación práctica para implementar simbiosis industrial.</p>
+                <a href="#" class="btn" style="margin-top: 1rem; display: inline-block; padding: 0.5rem 1rem;">Descargar</a>
+            </div>
+
+            <div class="benefit-card">
+                <div class="benefit-icon">
+                    <i class="fas fa-link"></i>
+                </div>
+                <h3>Plataformas de Conexión</h3>
+                <p>Redes donde empresas pueden encontrar socios potenciales.</p>
+                <a href="#" class="btn" style="margin-top: 1rem; display: inline-block; padding: 0.5rem 1rem;">Acceder</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Contacto -->
+    <section id="contacto">
+        <h2>Contacto</h2>
+        <div class="contact-container">
+            <div class="contact-form">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <label for="name">Nombre</label>
+                        <input type="text" id="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="company">Empresa (opcional)</label>
+                        <input type="text" id="company">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Mensaje</label>
+                        <textarea id="message" required></textarea>
+                    </div>
+                    <button type="submit" class="btn">Enviar Mensaje</button>
+                </form>
+            </div>
+            <div class="contact-info">
+                <div class="info-item">
+                    <div class="info-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </div>
+                    <div>
+                        <h3>Dirección</h3>
+                        <p>Calle Sostenibilidad 123, Parque Industrial Verde, Ciudad</p>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="info-icon">
+                        <i class="fas fa-phone"></i>
+                    </div>
+                    <div>
+                        <h3>Teléfono</h3>
+                        <p>+123 456 7890</p>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="info-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div>
+                        <h3>Email</h3>
+                        <p>info@simbiosisindustrial.com</p>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="info-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div>
+                        <h3>Horario</h3>
+                        <p>Lunes a Viernes: 9:00 - 18:00</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección FAQ -->
+    <section id="faq">
+        <h2>Preguntas Frecuentes</h2>
+        <div class="faq-container">
+            <div class="faq-item">
+                <div class="faq-question">¿Qué tipos de empresas pueden participar en la simbiosis industrial?</div>
+                <div class="faq-answer">
+                    <p>Todos los tipos de empresas, independientemente de su tamaño o sector, pueden beneficiarse de la simbiosis industrial. Desde grandes manufactureras hasta pequeñas empresas de servicios, todas generan y consumen recursos que podrían ser compartidos.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">¿Cómo se garantiza la confidencialidad entre empresas competidoras?</div>
+                <div class="faq-answer">
+                    <p>Las redes de simbiosis industrial suelen contar con acuerdos de confidencialidad y protocolos claros. Además, muchas conexiones ocurren entre empresas de sectores complementarios más que competidores directos.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">¿Qué inversión inicial se requiere?</div>
+                <div class="faq-answer">
+                    <p>La inversión varía según el caso, pero muchos intercambios requieren mínimas adaptaciones. Las plataformas públicas suelen ser gratuitas o de bajo costo, y los ahorros generados suelen superar rápidamente cualquier costo inicial.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">¿Cuánto tiempo toma establecer una conexión de simbiosis?</div>
+                <div class="faq-answer">
+                    <p>Algunas conexiones simples pueden establecerse en semanas, mientras que proyectos más complejos pueden requerir meses de planificación. El proceso suele acelerarse con el tiempo a medida que las empresas ganan experiencia.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">¿Qué pasa si una empresa de la red deja de operar?</div>
+                <div class="faq-answer">
+                    <p>Las redes robustas tienen múltiples conexiones, lo que permite reconfiguraciones. Además, el mapeo detallado de recursos facilita encontrar alternativas rápidamente.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="logo" style="justify-content: center;">
+            <i class="fas fa-recycle"></i>
+            <span>Simbiosis Industrial</span>
+        </div>
+        <div class="social-links">
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+        <p>© 2023 Simbiosis Industrial. Todos los derechos reservados.</p>
+        <p style="margin-top: 1rem; font-size: 0.8rem;">Promoviendo la economía circular a través de la colaboración industrial.</p>
+    </footer>
+
+    <script>
+        // Menú móvil
+        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+            const nav = document.getElementById('mainNav');
+            nav.style.display = nav.style.display === 'block' ? 'none' : 'block';
+        });
+
+        // FAQ Acordeón
+        const faqQuestions = document.querySelectorAll('.faq-question');
+        faqQuestions.forEach(question => {
+            question.addEventListener('click', () => {
+                const item = question.parentNode;
+                item.classList.toggle('active');
+                
+                // Cerrar otros items
+                faqQuestions.forEach(q => {
+                    if (q !== question) {
+                        q.parentNode.classList.remove('active');
+                    }
+                });
+            });
+        });
+
+        // Formulario de contacto
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Gracias por tu mensaje. Nos pondremos en contacto contigo pronto.');
+            this.reset();
+        });
+
+        // Smooth scrolling para anclas
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Cerrar menú móvil si está abierto
+                    if (window.innerWidth <= 768) {
+                        document.getElementById('mainNav').style.display = 'none';
+                    }
+                }
+            });
+        });
+
+        // Cambiar estilo del header al hacer scroll
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.style.boxShadow = '0 2px 10px rgba(0,0,0,0.2)';
+            } else {
+                header.style.boxShadow = '0 2px 10px rgba(0,0,0,0.1)';
+            }
+        });
+    </script>
+</body>
+</html>
